@@ -13,7 +13,7 @@ export const Header = () => {
 
         <Grid item>
           <Typography variant="h4" color="skyblue" gutterBottom>
-            Frammighan Model
+            Riesgo Cardiovascular
           </Typography>
         </Grid>
 

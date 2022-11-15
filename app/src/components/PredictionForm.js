@@ -2,10 +2,11 @@ import {Container, Grid, Autocomplete, TextField, InputAdornment, Button } from 
 
 export const PredictionForm = (props) => {
   const {_gender, _handleGender, _age, _handleAge, _smoker, _handleSmoker, 
-    _cholesterol, _handleCholesterol, _hdl, _handleHdl, _hta, _handleHta, _calculate, _reset } = props
+    _cholesterol, _handleCholesterol, _hdl, _handleHdl, _hta, _handleHta, _calculate, _reset,
+    _treatment, _handleTreatment} = props
 
   const range = (start, stop, step) => Array.from({ length: (stop - start) / step + 1}, (_, i) => start + (i * step));
-  const arr = range(35, 75, 1)
+  const arr = range(20, 79, 1)
   const ages = arr.map(n => n+"")
 
   return (
@@ -23,9 +24,9 @@ export const PredictionForm = (props) => {
                 value={_gender}
                 onChange={_handleGender}
                 id="combo-box-gender"
-                options={["Male", "Female"]}
-                sx={{ width: 140, paddingTop: 1, paddingBottom: 1}}
-                renderInput={(params) => <TextField {...params} label="Gender" required/>}
+                options={["Hombre", "Mujer"]}
+                sx={{ width: 150, paddingTop: 1, paddingBottom: 1}}
+                renderInput={(params) => <TextField {...params} label="Genero" required/>}
                 isOptionEqualToValue={(option, value) => option.id === value.id}
               />
             </Grid>
@@ -36,8 +37,8 @@ export const PredictionForm = (props) => {
                 onChange={_handleAge}
                 id="combo-box-Age"
                 options={ages}
-                sx={{ width: 100, paddingTop: 1, paddingBottom: 1}}
-                renderInput={(params) => <TextField {...params} label="Age" required/>}
+                sx={{ width: 110, paddingTop: 1, paddingBottom: 1}}
+                renderInput={(params) => <TextField {...params} label="Edad" required/>}
                 isOptionEqualToValue={(option, value) => option.id === value.id}
               />
             </Grid>
@@ -49,12 +50,12 @@ export const PredictionForm = (props) => {
               value={_cholesterol}
               onChange={_handleCholesterol}
               id="outlined-basic" 
-              label="Total cholesterol" 
+              label="Colesterol Total" 
               variant="outlined" 
               InputProps={{
                 endAdornment: <InputAdornment position="start">mg</InputAdornment>,
               }}
-              sx={{ width: 255, paddingBottom:1}}
+              sx={{ width: 275, paddingBottom:1}}
             />
           </Grid>
 
@@ -69,7 +70,7 @@ export const PredictionForm = (props) => {
               InputProps={{
                 endAdornment: <InputAdornment position="start">mg</InputAdornment>,
               }}
-              sx={{ width: 255, paddingBottom:1}}
+              sx={{ width: 275, paddingBottom:1}}
             />
           </Grid>
 
@@ -84,7 +85,7 @@ export const PredictionForm = (props) => {
               InputProps={{
                 endAdornment: <InputAdornment position="start">mg</InputAdornment>,
               }}
-              sx={{ width: 255, paddingBottom:1}}
+              sx={{ width: 275, paddingBottom:1}}
             />
           </Grid>
 
@@ -93,9 +94,21 @@ export const PredictionForm = (props) => {
               value={_smoker}
               onChange={_handleSmoker}
               id="combo-box-smoker"
-              options={["Yes", "No"]}
-              sx={{ width: 255, paddingBottom: 1}}
-              renderInput={(params) => <TextField {...params} label="Smoker" required/>}
+              options={["Si", "No"]}
+              sx={{ width: 275, paddingBottom: 1}}
+              renderInput={(params) => <TextField {...params} label="Fumador" required/>}
+              isOptionEqualToValue={(option, value) => option.id === value.id}
+            />
+          </Grid>
+
+          <Grid item>
+            <Autocomplete
+              value={_treatment}
+              onChange={_handleTreatment}
+              id="combo-box-medicine"
+              options={["Si", "No"]}
+              sx={{ width: 275, paddingBottom: 1}}
+              renderInput={(params) => <TextField {...params} label="HTA bajo tratamiento" required/>}
               isOptionEqualToValue={(option, value) => option.id === value.id}
             />
           </Grid>
