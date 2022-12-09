@@ -13,6 +13,7 @@ const App = () => {
   const [smoker, setSmoker] = useState('')
   const [treatment, setTreatment] = useState('')
   const [renderCvRisk, setRenderCvRisk] = useState(false)
+  const [pctRisk, setPctRisk] = useState(0)
 
   const handleGender = (event, newValue) => setGender(newValue) 
 
@@ -30,6 +31,8 @@ const App = () => {
 
   let puntos = 0
 
+  
+
   const resetFields = () => {
     setGender('')
     setAge('')
@@ -43,6 +46,7 @@ const App = () => {
 
   const calculate = (event) => {
     event.preventDefault()
+    
     puntos = 0
 
     const nAge = parseInt(age, 10)
@@ -56,15 +60,18 @@ const App = () => {
       validateSmokerFemale(nAge)
       validateHdlFemale(nHdl)
       validateHtaFemale(nHta)
+      validatePuntosFemale(puntos)
       console.log(puntos)
+      console.log(pctRisk)
     } else {
       validateAgeMale(nAge)
       validateCholesterolMale(nAge, nCholesterol)
       validateSmokerMale(nAge)
       validateHdlMale(nHdl)
       validateHtaMale(nHta)
+      validatePuntosMale(puntos)
       console.log(puntos)
-
+      console.log(pctRisk)
     }
     setRenderCvRisk(true)
   }
@@ -349,6 +356,64 @@ const App = () => {
     }
   }
 
+  const validatePuntosFemale = (puntos) => {
+    if(puntos < 9 || (puntos >= 9 && puntos <= 12))
+      setPctRisk(1)
+    if (puntos === 13 || puntos === 14)
+      setPctRisk(2)
+    if (puntos === 15)
+      setPctRisk(3)
+    if (puntos === 16)
+      setPctRisk(4)
+    if (puntos === 17)
+      setPctRisk(5)
+    if (puntos === 18)
+      setPctRisk(6)
+    if (puntos === 19)
+      setPctRisk(8)
+    if (puntos === 20)
+      setPctRisk(11)
+    if (puntos === 21)
+      setPctRisk(14)
+    if (puntos === 22)
+      setPctRisk(17)
+    if (puntos === 23)
+      setPctRisk(22)
+    if (puntos === 24)
+      setPctRisk(22)
+    if (puntos >= 25)
+      setPctRisk(30)
+  }
+
+  const validatePuntosMale = (puntos) => {
+    if(puntos < 0 || (puntos >= 0 && puntos <= 4))
+      setPctRisk(1)
+    if (puntos === 5 || puntos === 6)
+      setPctRisk(2)
+    if (puntos === 7)
+      setPctRisk(3)
+    if (puntos === 8)
+      setPctRisk(4)
+    if (puntos === 9)
+      setPctRisk(5)
+    if (puntos === 10)
+      setPctRisk(6)
+    if (puntos === 11)
+      setPctRisk(8)
+    if (puntos === 12)
+      setPctRisk(10)
+    if (puntos === 13)
+      setPctRisk(12)
+    if (puntos === 14)
+      setPctRisk(16)
+    if (puntos === 15)
+      setPctRisk(20)
+    if (puntos === 16)
+      setPctRisk(25)
+    if (puntos >= 17)
+      setPctRisk(30)
+  }
+
   return (
     <div>
       <Header/>
@@ -370,7 +435,8 @@ const App = () => {
         _calculate={calculate}
         _reset={resetFields}
       />
-      {renderCvRisk ? 
+      {
+        renderCvRisk ? 
         <CardiovascularRisk
           _gender={gender} 
           _age={age}
@@ -379,7 +445,10 @@ const App = () => {
           _hta={hta}
           _smoker={smoker}
           _treatment={treatment}
-        /> : <p></p>}
+          _pctRisk={pctRisk}
+        /> 
+        : <p></p>
+      }
       
 
     </div>
